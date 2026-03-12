@@ -1,0 +1,890 @@
+
+----------BASICES----------------
+kg = float(input("Enter weight in kilograms (method 3):"))
+pounds = kg*2.20462
+print(f"{kg} kilograms is {pounds:.2f} pounds")
+-----------------------
+  def kg_to_pounds():
+    """
+    Converts a weight entered in kilograms to pounds.
+    """
+    try:
+        kilograms = float(input("Enter the weight in kilograms: "))
+        pounds = kilograms * 2.20462
+        print(f"The weight in pounds is: {pounds:.2f}")
+    except ValueError:
+        print("Invalid input. Please enter a numerical value for weight.")
+
+# Call the function directly to run the conversion
+kg_to_pounds()
+  -----------------------------------------
+print("number using for loop:")
+for num in range(8, 90, 3):
+    print(num, end= " ")
+-----------------------
+print("\nnumber using while loop:")
+num =8
+while num <= 89:
+    print(num,end =" ")
+    num +=3
+------------------------------
+text = input("enter a string :")
+chars =list(text)
+print("array of characters:",chars)
+--------------------------------------
+text = input("enter a string:")
+chars = []
+for ch in text:
+    chars.append(ch)
+    print("array of characters:",chars)
+----------------------------------
+# cook your dish here
+numbers = [10, 5, 23, 8, 42, 15]
+largest_number = max(numbers)
+print(f"The largest number in the list is: {largest_number}")
+-------------------------------------------
+  name = "shanmukh"
+age = 20
+height = 5.4
+print(f"My name is {name}, I am {age} years old, My heigt is {height} meters")
+print(f"shanmukh's father age is {age+25} year old.")
+  -------------------------------------------------------------
+
+  -----OOPS IN PYTHON -----------------
+# We define a class named Car to represent a car.
+class Car:
+    # __init__ runs when you create a new Car. It sets up (initializes) the object.
+    def __init__(self, make, model, year):
+        # Save the 'make' (brand) on the object, e.g., "Toyota".
+        self.make = make
+        # Save the 'model' on the object, e.g., "Corolla".
+        self.model = model
+        # Save the manufacturing 'year' on the object, e.g., 2022.
+        self.year = year
+        # Track whether the car engine is running; start as False (off).
+        self.running = False
+
+    # Method to start the car.
+    def start(self):
+        # Only start if it's not already running.
+        if not self.running:
+            # Flip running state to True.
+            self.running = True
+            # Print a friendly message.
+            print(f"{self.year} {self.make} {self.model} started.")
+        else:
+            # If it was already running, say so.
+            print(f"{self.year} {self.make} {self.model} is already running.")
+
+    # Method to stop the car.
+    def stop(self):
+        # Only stop if it's currently running.
+        if self.running:
+            # Flip running state to False.
+            self.running = False
+            # Print a friendly message.
+            print(f"{self.year} {self.make} {self.model} stopped.")
+        else:
+            # If it was already stopped, say so.
+            print(f"{self.year} {self.make} {self.model} is already stopped.")
+# ---------- demo (you can run this) ----------
+# Create a Car object with make/model/year values.
+my_car = Car("Toyota", "Corolla", 2022)
+# Try starting the car.
+my_car.start()
+# Try starting again to see the "already running" path.
+my_car.start()
+# Now stop the car.
+my_car.stop()
+# Stop again to see the "already stopped" path.
+my_car.stop()
+-------------------------------------------------------------------
+  # Base class: a generic Animal.
+class Animal:
+    # __init__ lets every Animal have a name.
+    def __init__(self, name):
+        # Store the animal's name.
+        self.name = name
+
+    # A common behavior: move. This is the default version.
+    def move(self):
+        print(f"{self.name} moves around.")
+
+    # A generic speak method (can be overridden by subclasses).
+    def speak(self):
+        print(f"{self.name} makes a sound.")
+
+# Dog inherits from Animal: it gets name, move, speak by default.
+class Dog(Animal):
+    # Dogs can override speak to be more specific.
+    def speak(self):
+        print(f"{self.name} says: Woof!")
+
+    # A behavior specific to dogs.
+    def fetch(self, item):
+        print(f"{self.name} fetches the {item}.")
+
+# Cat also inherits from Animal.
+class Cat(Animal):
+    # Cats override speak too.
+    def speak(self):
+        print(f"{self.name} says: Meow!")
+
+    # A behavior specific to cats.
+    def scratch(self):
+        print(f"{self.name} scratches the post.")
+
+# ---------- demo ----------
+# Create a Dog named "Buddy".
+d = Dog("Buddy")
+# Create a Cat named "Misty".
+c = Cat("Misty")
+
+# Both can move (inherited from Animal).
+d.move()
+c.move()
+
+# Each has its own speak implementation.
+d.speak()
+c.speak()
+
+# Use their specific behaviors.
+d.fetch("ball")
+c.scratch()
+------------------------------------------------
+# Base class with a method all animals will implement in their own way.
+class Animal:
+    # make_sound defined here, but base version is generic.
+    def make_sound(self):
+        print("Some generic animal sound")
+
+# Dog overrides make_sound.
+class Dog(Animal):
+    def make_sound(self):
+        return "Woof!"
+
+# Cat overrides make_sound.
+class Cat(Animal):
+    def make_sound(self):
+        return "Meow!"
+
+# Bird overrides make_sound.
+class Bird(Animal):
+    def make_sound(self):
+        return "Tweet!"
+
+# A function that accepts ANY Animal and calls make_sound.
+# This shows polymorphism: the SAME call behaves differently
+
+# ---------- demo ----------
+# Make one of each animal.
+animals = [Dog(), Cat(), Bird()]
+
+# Call the same method on each; each prints its own sound.
+
+for a in animals:
+    print(f"an animal can make sound : {a.make_sound()}")
+  ---------------------------------------------------------
+# A small function to divide two numbers safely.
+def safe_divide(a, b):
+    # 'try' the risky operation (division).
+    try:
+        # This line might fail if b is 0.
+        result = a / b
+        # If it works, print and return the result.
+        print(f"{a} / {b} = {result}")
+        return result
+    # If b is 0, Python raises ZeroDivisionError; we catch it here.
+    except ZeroDivisionError:
+        # Explain the error nicely.
+        print("Error: Cannot divide by zero.")
+        # Optionally, return None to indicate failure.
+        return None
+    except TypeError:
+        print("Error: Invalid input types.please provide numbers.")
+    except Exception as e:
+        print(f"An unexpected error occurred : {e}")
+
+# ---------- demo ----------
+safe_divide(10, 2)   # OK
+safe_divide(10, 0)   # Triggers the except block
+-----------------------------------------------------------
+
+# Take input of heights separated by spaces
+heights_input = input("Enter all heights separated by a space: ")
+
+# Convert input into a list of integers
+heights = list(map(int, heights_input.split()))
+
+# Count number of people
+count = len(heights)
+print("Number of people:", count)
+
+# Calculate total height
+total = sum(heights)
+
+# Calculate average
+avg = total / count
+print("Average height:", avg)
+
+# Find heights below average
+below_avg = [h for h in heights if h < avg]
+print("Heights below average:", below_avg)
+
+
+
+############
+
+numbers = input("enter the list of number: ")  # user enters numbers as a string
+numbers_list = numbers.split()  # split string into list of strings
+count = 0
+
+# count elements manually
+for i in numbers_list:
+    count = count + 1
+print(f"the length of the list : {count}")
+
+# convert elements to integers
+for i in range(count):
+    numbers_list[i] = int(numbers_list[i])
+
+# initialize maximum
+maximum_number = numbers_list[0]
+
+# find max manually
+for number in numbers_list:
+    if number > maximum_number:
+        maximum_number = number
+print(f"the maximum number is : {maximum_number}")
+
+#################
+
+
+for number in range(1,100):
+    if number%3==0 and number%5==0:
+        print("fiZZbuzz")
+    elif number%3==0:
+        print("fizz")
+    elif number %5==0:
+        print("buzz")
+    else:
+        print(number)
+
+
+##################
+
+
+import math 
+
+def paint_calculation(height,width,cover):
+    area = height * width
+    no_of_cans = math.ceil(area/cover)
+    print(f"you will need {no_of_cans} cnas of paint.")
+
+
+h =int(input("enter the height of wall in meter:\n"))
+w = int(input("enter the width of wall in meter:\n"))
+coverage =7
+paint_calculation(width=w,height=h,cover=coverage)
+
+##################
+
+def add(*numbers):
+    c=0
+    for i in numbers:
+        c += i
+    print(f"sum  is {c}")
+
+add(1,2)
+add(3,4,5)
+add(6,7,8,9,0)
+
+#############
+
+def info_person(*args, **kwargs):
+    for key, value in kwargs.items():   # use .items(), not .item()
+        print(key, value)
+    print(args)
+
+# Test cases
+info_person(1, 2, name="ram", age="20", dept="cse")
+info_person(1, 2, 3, name="kavya", dept="ece")
+
+
+
+###################
+
+
+def greet(name,dept):
+    print(f"hi {name}")
+    print(f"are you from {dept} department")
+
+greet("jenny","cs")
+
+#######################
+
+import math
+def prime_checker(number):
+    is_prime = True
+    if number == 1:
+        is_prime=False
+    for i in range(2,math.ceil(number/2)+1):
+        if number%i == 0:
+            is_prime == False
+    if is_prime:
+        print("it is a prime number")
+    else:
+        print("not a prime number")
+n=int(input("enter the number"))
+prime_checker(n) 
+
+#################################
+
+# Prompt user for input
+weight = float(input("Enter weight in kg: "))
+height = float(input("Enter height in meters: "))
+
+# Calculate BMI
+bmi = weight / (height ** 2)
+
+# Display results
+print("Weight:", weight)
+print("BMI:", int(bmi))  # Displaying BMI as an integer
+--------------------------------------
+  def fib(n):
+    if n == 1:
+        return 0
+    if n == 2:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+
+for i in range(1, 10):
+    print(fib(i),end=" ")
+--------------------------------------------
+def fibonacci_memoization(n, memo={}):
+    """
+    Calculates the nth Fibonacci number using recursion with memoization
+    (dynamic programming).
+    """
+    if n in memo:
+        return memo[n]
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        memo[n] = fibonacci_memoization(n - 1, memo) + fibonacci_memoization(n - 2, memo)
+        return memo[n]
+
+# Get input from the user
+import sys
+
+if not sys.stdin.isatty():
+    num = 10  # Default value when no input is available. Can change to another default value.
+else:
+    try:
+        num = int(input("Enter the value of n to find the nth Fibonacci number: "))
+        if num < 0:
+            print("Please enter a non-negative integer.")
+        else:
+            result = fibonacci_memoization(num)
+            print(f"The {num}th Fibonacci number is: {result}")
+    except ValueError:
+        print("Invalid input. Please enter an integer.")
+-----------------------------------------------------------------------------------------------------
+-----------HANGMAN GAME------------
+  import random
+import hangman_stages
+import word_file 
+
+lives = 6
+chosen_word = random.choice(word_file.words)
+print(chosen_word)
+display=[]
+for i in range(len(chosen_word)):
+    display +=   '-'
+print(display)
+game_over = False
+while not game_over:
+    guessed_letter = input("guess a letter :").lower()
+    for position in range(len(chosen_word)):
+        letter = chosen_word[position]
+        if letter == guessed_letter:
+            display[position] = guessed_letter
+    print(display)
+    if guessed_letter not  in chosen_word:
+        lives -= 1
+        if lives == 0:
+            game_over =True
+            print("you lose")
+    if '-'  not in display:
+        game_over = True
+        print("you win")
+    print((hangman_stages.stages[lives])))
+
+--------------------------------------------------------------------------------------
+
+---LOOPS AND TUPLES----------
+numbers= [2,3,4,5,6]
+squares =[]
+for i in numbers:
+    square = i**2
+    squares.append(square)
+    print("the list of squares is :",squares)
+
+
+#######
+
+tuple1 = (2,56,34,3,5,-1)
+for i in tuple1:
+    print(i)
+    if i==5:
+        break
+else:
+    print("loop is sucessfully excuted")
+
+
+#####
+tuple1 = (2,56,34,3,5,-1)
+for i in tuple1:
+    print(i)
+    if i%4 == 0:
+        break
+else:
+    print("there is no value that is in the tuple")
+
+-------------------------------------------------------
+  ----PASSWORD GENATOR---------------
+  import random
+letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
+           'r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H',
+           'I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+symbols = ['!','@','#','$','%','^','&','*','(',')','+']
+numbers = ['0','1','2','3','4','5','6','7','8','9']
+print("welcome to random password genarator")
+no_letters=int(input("how many letter are you want in your password\n"))
+no_symbols=int(input("how many symbols are you want in your password\n"))
+no_numbers=int(input("how many numbers are you want in your password\n"))
+password_list=[]
+for i in range(1,no_letters+1):
+    char =  random.choice(letters)
+    password_list += char
+for i in range(1,no_symbols+1):
+    char =  random.choice(symbols)
+    password_list += char
+for i in range(1,no_numbers+1):
+    char =  random.choice(numbers)
+    password_list += char
+print(password_list)
+random.shuffle(password_list)
+print(password_list)
+password=""
+for j in password_list:
+    password += j
+print(password)
+-------------------------------------------------------------
+import random 
+#-------------------------------
+#a = random.randint(1,7)
+#a = random.randrange(1,3)
+#a = random.random()
+#a = random.uniform(1,3)
+#l=[1,2,3,4,465,778,98]
+#a = random.choice(l)
+#random.shuffle(l)
+#print(l)
+
+
+#-------------------------
+
+side=random.randint(0,1)
+print(side)
+if side == 1:
+    print("HEADs")
+else:
+    print("TAILs")
+
+#-------------------------------------
+
+names_list= input("enter the names by separated by comma:")
+names_list = names_list.split(",")
+#print(names_list)
+length = len(names_list)
+random_choice=random.randint(0,length-1)
+print(f"{names_list[random_choice]} will pay the bill")
+  --------------------------------------------------
+import random
+user_choice=int(input("enter your choice: type 0 for rock, 1 for paper,2 for scissors."))
+if user_choice >=3 or user_choice < 0:
+    print("you entered invalid  number, you lose.")
+else:
+    computer_choice = random.randint(0,2)
+    print("computer choice")
+    print(computer_choice)
+    if computer_choice == user_choice:
+        print("IT's DRAW")
+    elif computer_choice == 0 and user_choice == 2:
+        print("YOU LOSE")
+    elif computer_choice == 2 and user_choice == 0:
+        print("YOU WIN")
+    elif computer_choice > user_choice:
+        print("YOu lose")
+    elif computer_choice < user_choice:
+        print("you Win")
+---------------------------------------
+----SETS-------
+set1= {'Ram','Shyam','jenny'}
+set2= {'jenny','jiya','akash'}
+set3= {'ankur','pradeep'}
+
+#print(set1.union(set2,set3))
+#print(set1 | set2 | set3)
+#print(set1.union(('mohan','jenny')))
+
+#print(set1.intersection(set2,set3))
+#print(set1 & set2 & set3)
+#print(set1.intersection(('mohan','shiva')))
+
+#print(set1.difference(set2))
+#print(set1 - set2)
+#set2.difference_update(set1)
+#print(set1)
+#print(set2)
+
+#print(set1.symmetric_difference(set2))
+#print(set1 ^ set2 ^ set3)
+#set1.symmetric_difference_update(('mohan','shiva'))
+#print(set1)
+#print(set2)
+
+#print(set1.isdisjoint(set2))
+#print(set1.isdisjoint(('mohan','shiva')))
+
+
+#print(set1.issubset(['mohan','shiva','jenny','ram','shyam']))
+#print(set1.issubset(set2))
+#print(set1 <= set2)
+
+
+#print(set1.issuperset(set2))
+#print(set1 >= set2)
+
+
+set2.clear()
+print(set2)
+---------------------------------------------
+---NUMPY-----
+#Write a NumPy program using methods - info, add, array, all, greater, greater_equal,
+#less and less_equal,equal, allclose, zeros, ones, linspace, tolist.
+#a. To get help on the add function
+
+import numpy as np
+
+# Get help on the numpy.add function
+help(np.add)
+# or in an interactive environment like Jupyter:
+# np.add?
+--------------------------------------------
+
+
+#b. To test whether none of the elements of a given array is zero.
+
+
+import numpy as np
+
+# Create a sample array with no zeros
+arr1 = np.array([1, 2, 3, 4, 5])
+
+# Create a sample array with a zero
+arr2 = np.array([1, 0, 3, 4, 5])
+
+# Check if none of the elements are zero
+is_none_zero_1 = np.all(arr1 != 0)
+is_none_zero_2 = np.all(arr2 != 0)
+
+print("Array 1:", arr1)
+print("Are none of the elements zero?", is_none_zero_1)
+print("\nArray 2:", arr2)
+print("Are none of the elements zero?", is_none_zero_2)
+
+------------------------------------------------------------
+
+#c. To create an element-wise comparison (greater, greater_equal, less and less_equal,equal, equal within a tolerance) of two given arrays.
+
+import numpy as np
+
+# Create two sample arrays
+
+arr1 = np.array([1, 2, 3, 4, 5])
+
+arr2 = np.array([1, 2, 3, 4, 5.000000001])
+
+print("Array 1:", arr1)
+
+print("Array 2:", arr2)
+
+# Element-wise comparisons
+
+print("\nGreater than:", arr1 > arr2)
+
+print("Greater than or equal to:", arr1 >= arr2)
+
+print("Less than:", arr1 < arr2)
+print("less than or equal to ",arr1 <= arr2)
+print("equal to ",arr1 == arr2)
+
+---------------------------------------------------------------------------
+
+#2. Write a NumPy program using NumPy methods - max, min, argmax, argmin, argmax, repr, count, bincount, unique.
+#a. To extract all numbers from a given array which are less and greater than a specified number.
+
+
+import numpy as np
+
+# Create a sample NumPy array
+data = np.array([12, 5, 25, 7, 30, 18, 9, 45, 15])
+
+# Define the range to filter by
+min_val = 10
+max_val = 20
+
+print("Original array:", data)
+print(f"Filtering for numbers between {min_val} and {max_val}...")
+
+# Use boolean indexing to create a mask for elements in the range
+filtered_data = data[(data > min_val) & (data < max_val)]
+
+print("Extracted numbers:", filtered_data)
+
+
+#b. To find the indices of an array.
+
+import numpy as np
+
+# Create a sample 2D NumPy array
+arr = np.array([[10, 20, 5],
+                [15, 3, 25],
+                [30, 8, 12]])
+
+print("Original array:")
+print(arr)
+
+# Find the indices of the maximum values along each row (axis=1)
+max_indices = np.argmax(arr, axis=1)
+
+# Find the indices of the minimum values along each row (axis=1)
+min_indices = np.argmin(arr, axis=1)
+
+print("\nIndices of the maximum values along each row:", max_indices)
+print("Indices of the minimum values along each row:", min_indices)
+
+# To verify, you can use these indices to get the actual max and min values
+max_values = arr[np.arange(len(arr)), max_indices]
+min_values = arr[np.arange(len(arr)), min_indices]
+
+print("\nMaximum values:", max_values)
+print("Minimum values:", min_values)
+---------------------------------------------------
+  
+  --------------PANDAS------------
+# DataSeries:
+#a. Write a Pandas program to create and display a one-dimensional 
+#array-like object containing an array of data using Pandas module.
+#b. Write a Pandas program to convert a Panda module Series to Python
+#  list and it's type.
+ 
+import pandas as pd
+import numpy as np
+
+data_list = pd.Series([1,2,3,77,-55])
+
+print(data_list)
+
+data__list = data_list.tolist() 
+print(data__list)
+
+
+names=pd.Series(["shanmukh","loves","kavya","but","kavya","didn't","shanmukh"])
+print(names)
+
+names_list=names.tolist()
+print(names_list)
+-------------------------------------------------
+  
+  #Pandas DataFrames:
+#Consider Sample Python dictionary data and list labels:
+#exam_data = {'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael',
+#'Matthew', 'Laura', 'Kevin', 'Jonas'],
+#'score': [12.5, 9, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19],
+#'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+#'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes']}
+#labels = ['a', 'b', 'c', 'd', 'e', 'f, 'g', 'h', 'i', 'j']
+
+
+#a. Write a Pandas program to create and display a DataFrame from a specified
+#dictionary data which has the index labels.
+import pandas as pd
+import numpy as np
+
+
+exam_data = {'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael','Matthew', 'Laura', 'Kevin', 'Jonas'],
+    'score': [12.5, 9, 16.5, np.nan, 9, 20,14.5, np.nan, 8, 19],
+    'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+    'qualify':  ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes']}
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+#syntax df = pd.DataFrame(data,index=index_label)
+df = pd.DataFrame(exam_data,index = labels)
+print("DataFrame created from the dictionary:")
+print(df)
+
+#b. Write a Pandas program to change the name 'James' to 'Suresh' in name column of
+#the DataFrame.
+
+#syntax df.loc['row_value','column_value']=value
+df.loc['d','name'] = 'Suresh'
+print(df)
+
+
+#c. Write a Pandas program to insert a new column in existing DataFrame.
+
+salaries = [50000,60000,75000,450000,55000,70000,48000,62000,78000,65000]
+#syntax df['new_column'] = values
+df['salary'] = salaries
+print(df)
+
+#iv)Write a Pandas program to get list from DataFrame column headers
+
+#syntax my_list = df['column_name'].tolist()
+column_headers = df.columns.tolist()
+print(column_headers)
+
+----------------------------------------------
+  ----MATPLOTLIB------------
+  import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+x = np.linspace(0, 2 * np.pi, 100)
+y = np.sin(x)
+y2 = np.cos(x)
+y3 = np.sin(x) * np.cos(x)
+
+# Create a figure with a series of plots
+plt.figure(figsize=(12, 4))
+
+plt.subplot(1, 3, 1)
+plt.plot(x, y, color='blue')
+plt.title('Sine Wave')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+
+plt.subplot(1, 3, 2)
+plt.plot(x, y2, color='green')
+plt.title('Cosine Wave')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+
+plt.subplot(1, 3, 3)
+plt.plot(x, y3, color='red')
+plt.title('Product of Sine and Cosine')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+
+plt.tight_layout() # Adjusts subplot params for a tight layout
+plt.show()
+  ----------------------------------------------
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Sample data
+data = {'Category': ['A', 'B', 'C', 'D'],
+        'Value1': [10, 25, 15, 30],
+        'Value2': [15, 20, 25, 10]}
+df = pd.DataFrame(data)
+
+x_scatter = np.random.rand(50)
+y_scatter = np.random.rand(50)
+x_line = np.arange(10)
+y_line = np.random.randint(1, 10, size=10)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+
+# Scatter Plot
+axes[0, 0].scatter(x_scatter, y_scatter)
+axes[0, 0].set_title('Scatter Plot')
+axes[0, 0].set_xlabel('X-axis')
+axes[0, 0].set_ylabel('Y-axis')
+
+# Line Plot
+axes[0, 1].plot(x_line, y_line, marker='o')
+axes[0, 1].set_title('Line Plot')
+axes[0, 1].set_xlabel('X-axis')
+axes[0, 1].set_ylabel('Y-axis')
+
+# Bar Chart
+axes[1, 0].bar(df['Category'], df['Value1'])
+axes[1, 0].set_title('Bar Chart')
+axes[1, 0].set_xlabel('Category')
+axes[1, 0].set_ylabel('Value1')
+
+# This subplot is intentionally left empty to match the assignment's implied 2x2 grid
+axes[1, 1].set_visible(False) 
+
+plt.tight_layout()
+plt.show()
+
+-------------------------------------------------------------
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+# Sample time-series data
+dates = pd.to_datetime(pd.date_range(start='2024-01-01', periods=100, freq='D'))
+sales_data = np.random.randint(100, 500, size=100) + np.sin(np.arange(100) * 0.2) * 50
+df = pd.DataFrame({'Date': dates, 'Sales': sales_data})
+df = df.set_index('Date')
+
+plt.figure(figsize=(12, 6))
+plt.plot(df.index, df['Sales'])
+
+# Customize axis labels and date formats
+plt.xlabel('Date')
+plt.ylabel('Sales')
+plt.title('Daily Sales Over Time')
+
+# Use pandas' built-in plotting for automatic date formatting
+# This is a good practice for clean time-series plots
+df.plot(y='Sales', figsize=(12, 6), title='Daily Sales Over Time') 
+plt.show()
+
+---------------------------------------------------
+  import matplotlib.pyplot as plt
+import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
+
+# Sample 3D data
+np.random.seed(42)
+x = np.random.rand(50)
+y = np.random.rand(50)
+z = np.random.rand(50)
+
+# Create a 3D figure
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot the 3D data
+ax.scatter(x, y, z)
+
+# Set labels for the axes
+ax.set_xlabel('X-axis')
+ax.set_ylabel('Y-axis')
+ax.set_zlabel('Z-axis')
+ax.set_title('3D Scatter Plot')
+
+plt.show()
+
+---------------------------------------------------------------
